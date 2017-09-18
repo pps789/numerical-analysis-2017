@@ -12,5 +12,5 @@ int main(){
     printf("min_expo of quadruple precision: %d\n", LDBL_MIN_EXP-1); // -16382
     printf("smallest positive value of quadruple precision: %.33Le\n", pow(2.L, -16382));
     printf("largest negative value of quadruple precision: %.33Le\n", -pow(2.L, -16382));
-    printf("LDBL_MIN value in header<cfloat>: %.33Le\n", LDBL_MIN);
+    printf("LDBL_MIN value in header <cfloat>: %.33Le\n", LDBL_MIN);
 }
