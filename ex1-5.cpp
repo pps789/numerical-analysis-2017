@@ -13,7 +13,7 @@ int main(){
         for(int j=1;j<=i;j++) upper_sum += 1./j;
         for(int j=i;j>=1;j--) lower_sum += 1./j;
         long double lgn = log((long double)i);
-        printf("step 10^%d: standasrd order error %.16Le, reverse order error %.16Le\n",
+        printf("step 10^%d: standard order error %.16Le, reverse order error %.16Le\n",
                 step, GAMMA - upper_sum + lgn, GAMMA - lower_sum + lgn);
     }
 }
