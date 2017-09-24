@@ -65,18 +65,18 @@ void process(double (*fun)(double), double a, double b, int steps){
     for(double nd:newton) cout << nd << " "; cout << endl;
 
     cout << "Polynomial degree " << steps << ":" << endl;
-    cout << newton[0];
+    cout << newton[0] << endl;
     for(int i=1;i<=steps;i++){
         cout << "+(" << newton[i] << ")";
         for(int j=0;j<i;j++) cout << "(x" << (xlist[j] >= 0 ? "-" : "+") << abs(xlist[j]) << ")";
+        cout << endl;
     }
-    cout << endl;
 
     auto expanded = expansion(newton, xlist);
     cout << "Expanded polynomial degree " << steps << ":" << endl;
 
-    cout << expanded[0];
-    for(int i=1;i<=steps;i++) cout << "+(" << (abs(expanded[i]) < 1e-10 ? 0 : expanded[i])  << ")x^" << i; cout << endl;
+    cout << expanded[0] << endl;
+    for(int i=1;i<=steps;i++) cout << "+(" << (abs(expanded[i]) < 1e-10 ? 0 : expanded[i])  << ")x^" << i << endl;
 
     const int M = 1000000;
     cout << "Discrete maximum error with M = 10^6:" << endl;
