@@ -55,7 +55,7 @@ double get_value_from_newton(const vector<double>& newton, const vector<double>&
 void process(double (*fun)(double), double a, double b, int steps){
     double h = (b-a)/steps;
     vector<double> xlist(1, a);
-    for(int i=0;i<steps;i++) xlist.push_back(xlist.back() + h);
+    for(int i=0;i<steps;i++) xlist.push_back(a + (i+1)*h);
 
     cout << "Finding the interpolation polynomial degree " << steps << " with following points:" << endl;
     for(double x:xlist) cout<< "(" << x << ", " << fun(x) << ") "; cout << endl;
@@ -64,11 +64,19 @@ void process(double (*fun)(double), double a, double b, int steps){
     cout << "Found newton coefficients:" << endl;
     for(double nd:newton) cout << nd << " "; cout << endl;
 
+    cout << "Polynomial degree " << steps << ":" << endl;
+    cout << newton[0];
+    for(int i=1;i<=steps;i++){
+        cout << "+(" << newton[i] << ")";
+        for(int j=0;j<i;j++) cout << "(x" << (xlist[j] >= 0 ? "-" : "+") << abs(xlist[j]) << ")";
+    }
+    cout << endl;
+
     auto expanded = expansion(newton, xlist);
     cout << "Expanded polynomial degree " << steps << ":" << endl;
 
     cout << expanded[0];
-    for(int i=1;i<=steps;i++) cout << "+(" << expanded[i] << ")x^" << i; cout << endl;
+    for(int i=1;i<=steps;i++) cout << "+(" << (abs(expanded[i]) < 1e-10 ? 0 : expanded[i])  << ")x^" << i; cout << endl;
 
     const int M = 1000000;
     cout << "Discrete maximum error with M = 10^6:" << endl;
@@ -81,14 +89,14 @@ void process(double (*fun)(double), double a, double b, int steps){
 }
 
 int main(){
-    cout << "i) f(t) = 1/(1+t*t)" << endl << endl;
+    cout << "i) f(t) = 1/(1+t*t) on [-5, 5]" << endl << endl;
     for(int n=1;n<=10;n++){
         double a = -5, b = 5;
         process(f, a, b, n);
         cout << endl;
     }
 
-    cout << endl << endl << "ii) f(t) = sqrt(t)" << endl << endl;
+    cout << endl << endl << "ii) f(t) = sqrt(t) on [0, 1]" << endl << endl;
     for(int n=1;n<=10;n++){
         double a = 0, b = 1;
         process(g, a, b, n);
