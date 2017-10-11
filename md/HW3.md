@@ -53,3 +53,12 @@ interpolation할 점들의 개수를 입력하고, 각각의 x, y좌표를 순�
 ```
 
 ### (5)
+`https://www.desmos.com/calculator/`를 이용해 그렸다.
+![ex2-12-5-1](images/ex2-12-5-1.jpg)
+![ex2-12-5-2](images/ex2-12-5-2.jpg)
+
+붉은 색이 rational function이고, 푸른 색이 polynomial이다.
+rational function의 특성 상 점근선들이 보인다.
+분자의 차수가 큰 (3) 그래프의 경우, `y=kx`꼴의 점근선이 보인다.
+차수가 같은 (4) 그래프의 경우, `y=k`꼴의 점근선이 보인다.
+또한 분모가 근을 가지는 (3)의 경우 그래프가 불연속인 지점도 발견된다.
