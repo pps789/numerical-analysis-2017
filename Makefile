@@ -13,4 +13,4 @@ pdf/%.pdf: md/%.md
 	md-to-pdf $< $@
 
 clean:
-	rm -rf bin/*
+	rm -rf bin/* pdf/*

@@ -54,7 +54,11 @@ interpolation할 점들의 개수를 입력하고, 각각의 x, y좌표를 순�
 
 ### (5)
 `https://www.desmos.com/calculator/`를 이용해 그렸다.
+
+#### Graph of (3)
 ![ex2-12-5-1](images/ex2-12-5-1.jpg)
+
+#### Graph of (4)
 ![ex2-12-5-2](images/ex2-12-5-2.jpg)
 
 붉은 색이 rational function이고, 푸른 색이 polynomial이다.
