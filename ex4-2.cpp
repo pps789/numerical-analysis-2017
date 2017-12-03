@@ -17,7 +17,7 @@ void order_guess(const vector<double>& errors){
     }
     else{
         vector<double> last(errors.rbegin(), errors.rbegin() + 3);
-        double ord = (log(last[1]-last[0])) / (log(last[2]-last[1]));
+        double ord = (log(last[1]/last[0])) / (log(last[2]/last[1]));
         cout << "Guessing order: " << ord << endl;
     }
 }

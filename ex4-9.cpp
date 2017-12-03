@@ -7,6 +7,17 @@ using namespace std;
 
 const double EPS = 1e-12;
 
+void order_guess(const vector<double>& errors){
+    if(errors.size() < 3){
+        cout << "Guessing order failed: too fast conv." << endl;
+    }
+    else{
+        vector<double> last(errors.rbegin(), errors.rbegin() + 3);
+        double ord = (log(last[1]/last[0])) / (log(last[2]/last[1]));
+        cout << "Guessing order: " << ord << endl;
+    }
+}
+
 double _f(double x, int d){
     if(d==2 || d==1) return exp(x);
     return exp(x)-1;
@@ -26,13 +37,22 @@ double _h(double x, int d){
 
 void improved_newton(double (*f)(double, int), double x){
     int iter = 0;
+    vector<double> errors;
     do{
         iter++;
         x = x - ((f(x,1) - sqrt(pow(f(x,1),2) - 2*f(x,2)*f(x,0))) / f(x,2));
+        errors.push_back(x);
     } while(abs(f(x,0)) > EPS);
+
+    double solution = x;
+    for(auto& e:errors) e = abs(e-solution);
 
     cout << "Number of iteration: " << iter << endl;
     cout << "Solution using Improved Newton method: " << x << endl;
+    while(errors.size() >= 3){
+        order_guess(errors);
+        errors.pop_back();
+    }
 }
 
 vector<double> newton_difference(double (*fun)(double, int), const vector<double>& xlist){
@@ -46,17 +66,6 @@ vector<double> newton_difference(double (*fun)(double, int), const vector<double
         ret[k] = (ret[k] - ret[k-1]) / (xlist[k] - xlist[k-j]);
 
     return ret;
-}
-
-void order_guess(const vector<double>& errors){
-    if(errors.size() < 3){
-        cout << "Guessing order failed: too fast conv." << endl;
-    }
-    else{
-        vector<double> last(errors.rbegin(), errors.rbegin() + 3);
-        double ord = (log(last[1]-last[0])) / (log(last[2]-last[1]));
-        cout << "Guessing order: " << ord << endl;
-    }
 }
 
 void muller(double (*f)(double,  int), double x0, double x1, double x2){
@@ -83,7 +92,10 @@ void muller(double (*f)(double,  int), double x0, double x1, double x2){
 
     cout << "Number of iteration: " << iter << endl;
     cout << "Solution using Muller method: " << x << endl;
-    order_guess(errors);
+    while(errors.size() >= 3){
+        order_guess(errors);
+        errors.pop_back();
+    }
 }
 
 int main(){
@@ -94,5 +106,5 @@ int main(){
 
     muller(_f, -3, -2, -1);
     muller(_g, -1, 0, 1);
-    muller(_h, 0, 0.5, 1);
+    muller(_h, 0, 1, 2);
 }
